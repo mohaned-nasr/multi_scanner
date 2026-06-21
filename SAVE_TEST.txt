@@ -1,0 +1,1 @@
+If you can see this file in your IDE file tree at the project root, the folder sync works. Delete me after.
