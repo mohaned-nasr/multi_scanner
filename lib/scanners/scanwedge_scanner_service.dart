@@ -15,18 +15,18 @@ class ScanwedgeScannerService implements ScannerService{
   }
 
   @override
-  Future<void> start({required void Function(ScannnerResult result) onScan, required void Function(ScannerStatus status, {String? message}) onStatus}) async{
+  Future<void> start({required void Function(ScannerResult result) onScan, required void Function(ScannerStatus status, {String? message}) onStatus}) async{
     onStatus(ScannerStatus.initialising);
     try{
       _plugin=await Scanwedge.initialize();
-      final supported = await _plugin!.isDeviceSupported;
+      final supported = _plugin!.isDeviceSupported;
       if (!supported) {
         onStatus(ScannerStatus.deviceNotSupported);
         return;
       }
       await _plugin?.createScanProfile(ProfileModel(profileName: 'multi_scanner'));// ------> enablebarcode,,,, keep defaults
       _subscription =_plugin!.stream.listen((ScanResult){
-        onScan(ScannnerResult(
+        onScan(ScannerResult(
             code: ScanResult.barcode,
             symbology: ScanResult.barcodeType.name,
             timestamp: DateTime.now()));

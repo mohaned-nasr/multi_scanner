@@ -4,7 +4,7 @@ import 'package:multi_scanner/data/scan_result.dart';
 abstract class ScannerService {
 
   Future<void> start({///-------------------> initializing and starting the scanner
-    required void Function (ScannnerResult result) onScan,
+    required void Function (ScannerResult result) onScan,
     required void Function (ScannerStatus status ,{String? message }) onStatus
   });
 

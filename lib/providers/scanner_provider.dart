@@ -13,13 +13,13 @@ class ScannerProvider extends ChangeNotifier{
   ScannerType? _type;
   ScannerStatus? status=ScannerStatus.initialising;
   String? statusMessage;
-  ScannnerResult? _last;
-  final List<ScannnerResult> _history = [];
+  ScannerResult? _last;
+  final List<ScannerResult> _history = [];
 
   // getters
   ScannerType? get type => _type;
-  ScannnerResult? get last => _last;
-  List<ScannnerResult> get history => List.unmodifiable(_history);
+  ScannerResult? get last => _last;
+  List<ScannerResult> get history => List.unmodifiable(_history);
 
 
 ///should i boot the app with a default scanner ??
@@ -31,7 +31,7 @@ class ScannerProvider extends ChangeNotifier{
     notifyListeners();
     await active!.start(onScan: _onScan, onStatus: _onStatus);
   }
-  void _onScan(ScannnerResult result) {
+  void _onScan(ScannerResult result) {
     _last = result;
     _history.insert(0, result);
     notifyListeners();
@@ -43,7 +43,9 @@ class ScannerProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  Future<void> softTrigger() => active?.softTrigger() ?? Future.value();
+  Future<void> softTrigger() async{
+    await active?.softTrigger();
+  }
 
   @override
   void dispose() {

@@ -4,7 +4,7 @@ import 'package:multi_scanner/scanners/scanner_service.dart';
 import 'package:pointmobile_scanner_advanced/pointmobile_scanner_advanced.dart';
 
 class PointmobileScannerService implements ScannerService {
-  void Function(ScannnerResult result)? _onScan;
+  void Function(ScannerResult result)? _onScan;
   @override
   Future<void> softTrigger() async{
     await PMScanner.triggerOnOff(isOn: true);
@@ -13,7 +13,7 @@ class PointmobileScannerService implements ScannerService {
 
   @override
   Future<void> start({
-    required void Function(ScannnerResult result) onScan,
+    required void Function(ScannerResult result) onScan,
     required void Function(ScannerStatus status, {String? message}) onStatus,
   }) async {
     _onScan = onScan;
@@ -40,7 +40,7 @@ class PointmobileScannerService implements ScannerService {
 
   void _onDecode(Symbology symbology, String barcodeNumber) {
     _onScan?.call(
-      ScannnerResult(
+      ScannerResult(
         code: barcodeNumber,
         timestamp: DateTime.now(),
         symbology: symbology.name,

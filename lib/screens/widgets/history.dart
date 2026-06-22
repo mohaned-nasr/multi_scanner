@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:multi_scanner/data/scan_result.dart';
 
 class History extends StatelessWidget{
-  final List<ScannnerResult> history;
+  final List<ScannerResult> history;
 
   const History({super.key, required this.history});
 

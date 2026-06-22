@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:multi_scanner/data/scan_result.dart';
 
 class Result extends StatelessWidget{
-  final ScannnerResult? result;
+  final ScannerResult? result;
 
   const Result({super.key, required this.result});
 
